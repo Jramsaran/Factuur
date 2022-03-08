@@ -21,7 +21,7 @@ class Read_PDF:
         if os.path.exists(temp_file_path) is True:
 
             file_number += 1
-            self.create_temp_file(self, pdf_file, file_num = file_number)
+            self.create_temp_file(self, pdf_file, file_num=file_number)
 
         print(f"Temp file {temp_file_path} created.")
         return temp_file_path
@@ -39,7 +39,7 @@ class Read_PDF:
         pdf_file = self.pdf_file
 
         temp_file_path = self.create_temp_file(pdf_file)
-        
+
         with open(pdf_file, 'rb') as pdf_in:
             pdf_reader = PyPDF2.PdfFileReader(pdf_in)
             pdf_writer = PyPDF2.PdfFileWriter()
@@ -72,7 +72,7 @@ class Read_PDF:
 
     def cidToChar(self, cidx):
         return chr(int(re.findall(r'\(cid\:(\d+)\)', cidx)[0]) + 29)
-    
+
     def decode_pdf(self, extracted_text: str) -> str:
 
         text = {}
@@ -86,13 +86,14 @@ class Read_PDF:
                     for cid in regex_result:
                         line = line.replace(cid, self.cidToChar(cid))
                         text[index].append(line)
-                
+
                 compiled_text += repr(line).strip("'").replace('Ù', '€')
                 compiled_text += '\n' 
-        
-        compiled_text = compiled_text.rstrip() # remove trailing newline
+
+        compiled_text = compiled_text.rstrip()  # remove trailing newline
 
         return compiled_text
+
 
 if __name__ == '__main__':
 
