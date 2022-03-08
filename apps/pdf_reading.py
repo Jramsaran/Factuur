@@ -88,7 +88,7 @@ class Read_PDF:
                         text[index].append(line)
 
                 compiled_text += repr(line).strip("'").replace('Ù', '€')
-                compiled_text += '\n' 
+                compiled_text += '\n'
 
         compiled_text = compiled_text.rstrip()  # remove trailing newline
 
