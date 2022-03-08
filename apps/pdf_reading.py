@@ -1,4 +1,3 @@
-from tokenize import String
 import pdfplumber
 import PyPDF2
 import os
@@ -87,6 +86,7 @@ class Read_PDF:
                     for cid in regex_result:
                         line = line.replace(cid, self.cidToChar(cid))
                         text[index].append(line)
+                
                 compiled_text += repr(line).strip("'").replace('Ù', '€')
                 compiled_text += '\n' 
         
