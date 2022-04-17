@@ -4,7 +4,6 @@ import os
 import random
 import re
 
-
 class Read_PDF:
 
     def __init__(self, pdf_file: str) -> None:
@@ -93,16 +92,3 @@ class Read_PDF:
         compiled_text = compiled_text.rstrip()  # remove trailing newline
 
         return compiled_text
-
-
-if __name__ == '__main__':
-
-    pdf = Read_PDF(r'C:\\Users\\Jeremy\\Downloads\\CharterKosten-2366.pdf')
-    temp_file_path = pdf.rotator(270)
-
-    extracted_text = pdf.read_pdf(temp_file_path)
-    decoded_text = pdf.decode_pdf(extracted_text)
-
-    pdf.delete_temp_file(temp_file_path)
-
-    print(decoded_text)
