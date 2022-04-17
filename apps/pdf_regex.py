@@ -1,5 +1,24 @@
 import re
 import configparser
+from typing import Dict
+
+class Regex_Compiler:
+
+    def __init__(self, regex: str) -> None:
+
+        self.regex = re.compile(regex)
+  
+    def regex_match(self, decoded_text: str) -> Dict:
+
+        regex = self.regex
+        
+        match_dict = {}
+        
+        for index, line in enumerate(decoded_text.split("\n")):
+
+            match_dict[index] = regex.search(line)
+
+        return match_dict
 
 
 def search_patterns_JPR(text_file):
@@ -91,3 +110,7 @@ def search_patterns_JPR(text_file):
             search_patterns_JPR.totaal_bedrag = float(line2.split()[-1].replace(".", "").replace(",", "."))
 
     return JPR_data, JPR_extra_data
+
+
+
+    
