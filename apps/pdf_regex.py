@@ -1,24 +1,39 @@
 import re
 import configparser
 from typing import Dict
+import pandas as pd
 
 class Regex_Compiler:
 
-    def __init__(self, regex: str) -> None:
+    def __init__(self, df_row: 'pd.Series') -> None:
 
-        self.regex = re.compile(regex)
+        self.name = df_row[0]
+        self.regex = re.compile(df_row[1])
+        self.settings = df_row[2]
   
-    def regex_match(self, decoded_text: str) -> Dict:
+    def regex_search(self, decoded_text: str) -> Dict:
 
         regex = self.regex
         
-        match_dict = {}
+        search_dict = {}
         
         for index, line in enumerate(decoded_text.split("\n")):
 
-            match_dict[index] = regex.search(line)
+            search_dict[index] = regex.search(line)
 
-        return match_dict
+        return search_dict
+
+
+class Regex_Split:
+
+    pass
+
+
+class Regex_Group:
+
+    pass
+
+
 
 
 def search_patterns_JPR(text_file):
@@ -110,7 +125,3 @@ def search_patterns_JPR(text_file):
             search_patterns_JPR.totaal_bedrag = float(line2.split()[-1].replace(".", "").replace(",", "."))
 
     return JPR_data, JPR_extra_data
-
-
-
-    
